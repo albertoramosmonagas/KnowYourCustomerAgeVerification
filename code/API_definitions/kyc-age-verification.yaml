@@ -329,7 +329,7 @@ components:
     AgeCheck:
       type: "string"
       maxLength: 15
-      description: Indicate `"true"` when the age of the user is the same age or older than the age threshold (age >= age threshold), and `"false"` if not (age < age threshold). `ageCheck` always refers to the contract holder of the subscription. If the API Provider doesn't have enough information to perform the validation, a `not_available` is returned.
+      description: Indicate `"true"` when the age of the user is the same age or older than the age threshold (age >= age threshold), and `"false"` if not (age < age threshold). If the API Provider doesn't have enough information to perform the validation, a `not_available` can be returned.
       enum:
         - 'true'
         - 'false'
