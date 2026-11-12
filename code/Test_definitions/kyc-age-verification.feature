@@ -125,10 +125,10 @@ Feature: CAMARA KYC Age Verification API, vwip - Operation verifyAge
     And the response contains property "$.parentalControl" whose value is one of ["true", "false", "not_available"]
 
   @kyc-age-verification_verifyAge_06_flags_not_requested
-  Scenario: Validate that contentLock and parentalControl are not returned when they are not requested
+  Scenario Outline: Validate that contentLock and parentalControl are not returned when they are not requested
     Given a valid testing phone number supported by the service, identified by the access token or provided in the request body
     And the request body property "$.ageThreshold" is set to a valid value compliant with the OAS schema at "#/components/schemas/AgeThreshold"
-    And the request body properties "$.includeContentLock" and "$.includeParentalControl" are not included or are set to false
+    And the request body properties "$.includeContentLock" and "$.includeParentalControl" are <flag_value>
     When the request "verifyAge" is sent
     Then the response status code is 200
     And the response header "Content-Type" is "application/json"
@@ -136,6 +136,11 @@ Feature: CAMARA KYC Age Verification API, vwip - Operation verifyAge
     And the response body complies with the OAS schema at "#/components/schemas/VerifyResponseBody"
     And the response body does not contain the property "$.contentLock"
     And the response body does not contain the property "$.parentalControl"
+
+    Examples:
+      | flag_value   |
+      | not included |
+      | set to false |
 
    # Generic 400 errors
 
